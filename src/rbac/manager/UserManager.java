@@ -1,7 +1,7 @@
 package rbac.manager;
 
-import rbac.model.User;
-import rbac.filters.UserFilter;
+import rbac.model.*;
+import rbac.*;
 import rbac.repository.Repository;
 
 import java.util.*;

@@ -1,7 +1,7 @@
 package rbac.manager;
 
+import rbac.*;
 import rbac.model.*;
-import rbac.filters.AssignmentFilter;
 import rbac.repository.Repository;
 
 import java.util.*;

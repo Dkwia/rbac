@@ -1,3 +1,7 @@
+package rbac.model;
+
+import rbac.User;
+
 @FunctionalInterface
 public interface UserFilter {
     boolean test(User user);

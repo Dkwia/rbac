@@ -1,3 +1,8 @@
+package rbac.model;
+
+import rbac.Permission;
+import rbac.model.RoleFilter;
+
 public class RoleFilters {
 
     public static RoleFilter byName(String name) {

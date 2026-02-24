@@ -1,3 +1,9 @@
+package rbac.sorters;
+
+import rbac.RoleAssignment;
+
+import java.util.Comparator;
+
 public class AssignmentSorters {
 
     public static Comparator<RoleAssignment> byUsername() {

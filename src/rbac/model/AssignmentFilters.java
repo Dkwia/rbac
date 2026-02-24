@@ -1,3 +1,10 @@
+package rbac.model;
+
+import rbac.RoleAssignment;
+import rbac.TemporaryAssignment;
+import rbac.User;
+import rbac.Role;
+
 import java.time.LocalDateTime;
 
 public class AssignmentFilters {

@@ -1,3 +1,5 @@
+package rbac.model;
+
 public class UserFilters {
 
     public static UserFilter byUsername(String username) {

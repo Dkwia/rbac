@@ -1,12 +1,13 @@
 package rbac.manager;
 
-import rbac.model.Permission;
-import rbac.model.Role;
-import rbac.filters.RoleFilter;
+import rbac.Permission;
+import rbac.model.*;
 import rbac.repository.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import rbac.Role;
+
 
 public class RoleManager implements Repository<Role> {
 

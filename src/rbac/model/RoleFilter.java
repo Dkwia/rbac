@@ -1,3 +1,7 @@
+package rbac.model;
+
+import rbac.Role;
+
 @FunctionalInterface
 public interface RoleFilter {
 
