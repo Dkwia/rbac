@@ -6,6 +6,7 @@ public class TemporaryAssignment extends AbstractRoleAssignment {
 
     private String expiresAt;
     private boolean autoRenew;
+    private boolean revoked;
 
     public TemporaryAssignment(User user,
                                Role role,
@@ -13,13 +14,14 @@ public class TemporaryAssignment extends AbstractRoleAssignment {
                                String expiresAt,
                                boolean autoRenew) {
         super(user, role, metadata);
+        LocalDateTime.parse(expiresAt);
         this.expiresAt = expiresAt;
         this.autoRenew = autoRenew;
     }
 
     @Override
     public boolean isActive() {
-        return !isExpired();
+        return !revoked && !isExpired();
     }
 
     @Override
@@ -32,11 +34,24 @@ public class TemporaryAssignment extends AbstractRoleAssignment {
     }
 
     public void extend(String newExpirationDate) {
+        LocalDateTime.parse(newExpirationDate);
         this.expiresAt = newExpirationDate;
     }
 
     public String getTimeRemaining() {
         return "Expires at: " + expiresAt;
+    }
+
+    public String getExpiresAt() {
+        return expiresAt;
+    }
+
+    public boolean isAutoRenew() {
+        return autoRenew;
+    }
+
+    public void revoke() {
+        revoked = true;
     }
 
     @Override

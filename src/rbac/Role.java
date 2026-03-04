@@ -41,6 +41,16 @@ public class Role {
 
     public String getName() { return name; }
 
+    public String getDescription() { return description; }
+
+    public void setName(String name) {
+        this.name = Objects.requireNonNull(name);
+    }
+
+    public void setDescription(String description) {
+        this.description = Objects.requireNonNull(description);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
