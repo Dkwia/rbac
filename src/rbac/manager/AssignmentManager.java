@@ -89,6 +89,7 @@ public class AssignmentManager implements Repository<RoleAssignment> {
 
     public List<RoleAssignment> getExpiredAssignments() {
         return assignments.values().stream()
+                .filter(a -> a instanceof TemporaryAssignment)
                 .filter(a -> !a.isActive())
                 .collect(Collectors.toList());
     }
@@ -126,6 +127,8 @@ public class AssignmentManager implements Repository<RoleAssignment> {
 
         if (assignment instanceof PermanentAssignment p) {
             p.revoke();
+        } else if (assignment instanceof TemporaryAssignment t) {
+            t.revoke();
         } else {
             assignments.remove(assignmentId);
         }
@@ -151,5 +154,12 @@ public class AssignmentManager implements Repository<RoleAssignment> {
                 .anyMatch(a ->
                         a.role().equals(role) &&
                         a.isActive());
+    }
+
+    public int removeAssignmentsForUser(User user) {
+        if (user == null) return 0;
+        int before = assignments.size();
+        assignments.entrySet().removeIf(e -> e.getValue().user().equals(user));
+        return before - assignments.size();
     }
 }
