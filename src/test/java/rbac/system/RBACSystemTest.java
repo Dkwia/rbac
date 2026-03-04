@@ -1,8 +1,9 @@
-package rbac.system;
+package test.java.rbac.system;
 
 import org.junit.jupiter.api.Test;
 import rbac.Role;
 import rbac.User;
+import rbac.system.RBACSystem;
 
 import java.util.Optional;
 
