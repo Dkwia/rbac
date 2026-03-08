@@ -5,7 +5,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
-.txt
+*.txt
 
 ### Eclipse ###
 .apt_generated
