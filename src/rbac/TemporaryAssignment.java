@@ -1,6 +1,7 @@
 package rbac;
 
-import java.time.LocalDateTime;
+import rbac.util.DateUtils;
+import rbac.util.ValidationUtils;
 
 public class TemporaryAssignment extends AbstractRoleAssignment {
 
@@ -14,8 +15,11 @@ public class TemporaryAssignment extends AbstractRoleAssignment {
                                String expiresAt,
                                boolean autoRenew) {
         super(user, role, metadata);
-        LocalDateTime.parse(expiresAt);
-        this.expiresAt = expiresAt;
+        String normalized = normalizeDate(expiresAt);
+        if (!ValidationUtils.isValidDate(normalized)) {
+            throw new IllegalArgumentException("Invalid expiration date format (YYYY-MM-DD)");
+        }
+        this.expiresAt = normalized;
         this.autoRenew = autoRenew;
     }
 
@@ -30,16 +34,19 @@ public class TemporaryAssignment extends AbstractRoleAssignment {
     }
 
     public boolean isExpired() {
-        return LocalDateTime.now().isAfter(LocalDateTime.parse(expiresAt));
+        return DateUtils.isAfter(DateUtils.getCurrentDate(), expiresAt);
     }
 
     public void extend(String newExpirationDate) {
-        LocalDateTime.parse(newExpirationDate);
-        this.expiresAt = newExpirationDate;
+        String normalized = normalizeDate(newExpirationDate);
+        if (!ValidationUtils.isValidDate(normalized)) {
+            throw new IllegalArgumentException("Invalid expiration date format (YYYY-MM-DD)");
+        }
+        this.expiresAt = normalized;
     }
 
     public String getTimeRemaining() {
-        return "Expires at: " + expiresAt;
+        return "Expires at: " + expiresAt + " (" + DateUtils.formatRelativeTime(expiresAt) + ")";
     }
 
     public String getExpiresAt() {
@@ -57,5 +64,13 @@ public class TemporaryAssignment extends AbstractRoleAssignment {
     @Override
     public String summary() {
         return super.summary() + "\nExpires at: " + expiresAt;
+    }
+
+    private static String normalizeDate(String value) {
+        if (value == null) return null;
+        if (value.length() >= 10 && (value.contains("T") || value.contains(" "))) {
+            return value.substring(0, 10);
+        }
+        return value;
     }
 }

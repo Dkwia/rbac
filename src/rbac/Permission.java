@@ -1,23 +1,24 @@
 package rbac;
 
+import rbac.util.ValidationUtils;
+
 public record Permission(String name, String resource, String description) {
 
     public Permission {
-        if (name == null || name.isBlank())
-            throw new IllegalArgumentException("Permission name cannot be empty");
+        name = ValidationUtils.normalizeString(name);
+        ValidationUtils.requireNonEmpty(name, "Permission name");
 
         if (name.contains(" "))
             throw new IllegalArgumentException("Permission name cannot contain spaces");
 
         name = name.toUpperCase();
 
-        if (resource == null || resource.isBlank())
-            throw new IllegalArgumentException("Resource cannot be empty");
-
+        resource = ValidationUtils.normalizeString(resource);
+        ValidationUtils.requireNonEmpty(resource, "Resource");
         resource = resource.toLowerCase();
 
-        if (description == null || description.isBlank())
-            throw new IllegalArgumentException("Description cannot be empty");
+        description = ValidationUtils.normalizeString(description);
+        ValidationUtils.requireNonEmpty(description, "Description");
     }
 
     public String format() {

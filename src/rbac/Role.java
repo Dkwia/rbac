@@ -1,5 +1,7 @@
 package rbac;
 
+import rbac.util.ValidationUtils;
+
 import java.util.*;
 
 public class Role {
@@ -11,8 +13,10 @@ public class Role {
 
     public Role(String name, String description) {
         this.id = UUID.randomUUID().toString();
-        this.name = Objects.requireNonNull(name);
-        this.description = Objects.requireNonNull(description);
+        ValidationUtils.requireNonEmpty(name, "Role name");
+        ValidationUtils.requireNonEmpty(description, "Description");
+        this.name = ValidationUtils.normalizeString(name);
+        this.description = ValidationUtils.normalizeString(description);
     }
 
     public void addPermission(Permission permission) {
@@ -44,11 +48,13 @@ public class Role {
     public String getDescription() { return description; }
 
     public void setName(String name) {
-        this.name = Objects.requireNonNull(name);
+        ValidationUtils.requireNonEmpty(name, "Role name");
+        this.name = ValidationUtils.normalizeString(name);
     }
 
     public void setDescription(String description) {
-        this.description = Objects.requireNonNull(description);
+        ValidationUtils.requireNonEmpty(description, "Description");
+        this.description = ValidationUtils.normalizeString(description);
     }
 
     @Override

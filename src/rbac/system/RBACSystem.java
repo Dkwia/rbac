@@ -14,6 +14,8 @@ public class RBACSystem {
     private final UserManager userManager;
     private final RoleManager roleManager;
     private final AssignmentManager assignmentManager;
+    private final AuditLog auditLog;
+    private final ReportGenerator reportGenerator;
     private String currentUser;
     private boolean running;
 
@@ -21,6 +23,8 @@ public class RBACSystem {
         this.userManager = new UserManager();
         this.roleManager = new RoleManager();
         this.assignmentManager = new AssignmentManager();
+        this.auditLog = new AuditLog();
+        this.reportGenerator = new ReportGenerator();
         this.roleManager.setAssignmentManager(this.assignmentManager);
         this.currentUser = "system";
         this.running = true;
@@ -36,6 +40,14 @@ public class RBACSystem {
 
     public AssignmentManager getAssignmentManager() {
         return assignmentManager;
+    }
+
+    public AuditLog getAuditLog() {
+        return auditLog;
+    }
+
+    public ReportGenerator getReportGenerator() {
+        return reportGenerator;
     }
 
     public void setCurrentUser(String username) {

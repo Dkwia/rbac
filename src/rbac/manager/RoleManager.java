@@ -3,6 +3,7 @@ package rbac.manager;
 import rbac.Permission;
 import rbac.model.*;
 import rbac.repository.Repository;
+import rbac.util.ValidationUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -116,8 +117,9 @@ public class RoleManager implements Repository<Role> {
         Role role = findByName(currentName)
                 .orElseThrow(() -> new NoSuchElementException("Role not found"));
 
-        String targetName = Objects.requireNonNull(newName);
-        Objects.requireNonNull(newDescription);
+        ValidationUtils.requireNonEmpty(newName, "Role name");
+        ValidationUtils.requireNonEmpty(newDescription, "Description");
+        String targetName = ValidationUtils.normalizeString(newName);
 
         if (!currentName.equals(targetName) && rolesByName.containsKey(targetName)) {
             throw new IllegalArgumentException("Role '" + targetName + "' already exists");

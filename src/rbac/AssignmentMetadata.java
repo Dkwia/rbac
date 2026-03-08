@@ -1,6 +1,6 @@
 package rbac;
 
-import java.time.LocalDateTime;
+import rbac.util.DateUtils;
 
 public record AssignmentMetadata(String assignedBy,
                                  String assignedAt,
@@ -9,7 +9,7 @@ public record AssignmentMetadata(String assignedBy,
     public static AssignmentMetadata now(String assignedBy, String reason) {
         return new AssignmentMetadata(
                 assignedBy,
-                LocalDateTime.now().toString(),
+                DateUtils.getCurrentDate(),
                 reason
         );
     }

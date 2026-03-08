@@ -5,7 +5,7 @@ import rbac.TemporaryAssignment;
 import rbac.User;
 import rbac.Role;
 
-import java.time.LocalDateTime;
+import rbac.util.DateUtils;
 
 public class AssignmentFilters {
 
@@ -42,16 +42,13 @@ public class AssignmentFilters {
     }
 
     public static AssignmentFilter assignedAfter(String date) {
-        return a -> LocalDateTime.parse(a.metadata().assignedAt())
-                .isAfter(LocalDateTime.parse(date));
+        return a -> DateUtils.isAfter(a.metadata().assignedAt(), date);
     }
 
     public static AssignmentFilter expiringBefore(String date) {
         return a -> {
             if (a instanceof TemporaryAssignment t) {
-                return LocalDateTime.parse(t.getTimeRemaining()
-                        .replace("Expires at: ", ""))
-                        .isBefore(LocalDateTime.parse(date));
+                return DateUtils.isBefore(t.getExpiresAt(), date);
             }
             return false;
         };
