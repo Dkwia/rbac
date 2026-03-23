@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec550188-ea40-4a41-8666-4e8b2779dc19" name="Changes" comment="provide new packages">
-      <change beforePath="$PROJECT_DIR$/src/rbac/AbstractRoleAssignment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/AssignmentMetadata.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/PermanentAssignment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/Permission.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/RoleAssignment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/TemporaryAssignment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rbac/User.java" beforeDir="false" />
+    <list default="true" id="ec550188-ea40-4a41-8666-4e8b2779dc19" name="Changes" comment="create multithread script with workers &#10;delete old rbac files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +50,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.MultiThreadSimulation.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.CommandParserTest.executor": "Run",
     "JUnit.CommandRegistryTest.executor": "Run",
@@ -77,9 +70,14 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.appearance"
+    "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
+  <component name="Push.Settings">
+    <force-push-targets>
+      <force-push-target remote-path="origin" branch="feature/multithread" />
+    </force-push-targets>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -191,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772584051566</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="create multithread script with workers &#10;delete old rbac files">
+      <option name="closed" value="true" />
+      <created>1774253380982</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1774253380982</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -207,7 +213,8 @@
     <MESSAGE value="finalize module tests" />
     <MESSAGE value="fixed IDEA package issue" />
     <MESSAGE value="provide new packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="provide new packages" />
+    <MESSAGE value="create multithread script with workers &#10;delete old rbac files" />
+    <option name="LAST_COMMIT_MESSAGE" value="create multithread script with workers &#10;delete old rbac files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
