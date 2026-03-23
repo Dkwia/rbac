@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec550188-ea40-4a41-8666-4e8b2779dc19" name="Changes" comment="provide new packages">
+      <change beforePath="$PROJECT_DIR$/src/rbac/AbstractRoleAssignment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/AssignmentMetadata.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/PermanentAssignment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/Permission.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/RoleAssignment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/TemporaryAssignment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rbac/User.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dkwia&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dkwia/rbac.git&quot;,
+    &quot;accountId&quot;: &quot;773f34e7-fd7c-4d4c-a61a-e88e025f9129&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3ARgxJOhyNaTbDdxb46WNapq1ZH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.CommandParserTest.executor": "Run",
+    "JUnit.CommandRegistryTest.executor": "Run",
+    "JUnit.RBACIntegrationTest.executor": "Run",
+    "JUnit.RBACSystemTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.GPG_PINENTRY_CONFIGURATION_PROPOSAL": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/multithread",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.appearance"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec550188-ea40-4a41-8666-4e8b2779dc19" name="Changes" comment="" />
+      <created>1772561043605</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772561043605</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add .idea to gitignore again">
+      <option name="closed" value="true" />
+      <created>1772561798643</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772561798643</updated>
+    </task>
+    <task id="LOCAL-00002" summary="functional command interface">
+      <option name="closed" value="true" />
+      <created>1772561968616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772561968616</updated>
+    </task>
+    <task id="LOCAL-00003" summary="menu parser class">
+      <option name="closed" value="true" />
+      <created>1772562074664</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1772562074664</updated>
+    </task>
+    <task id="LOCAL-00004" summary="rbac system class to init statistics">
+      <option name="closed" value="true" />
+      <created>1772562183415</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1772562183415</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add iml to gitignore">
+      <option name="closed" value="true" />
+      <created>1772562886549</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1772562886549</updated>
+    </task>
+    <task id="LOCAL-00006" summary="removed old init. add new rbac system init">
+      <option name="closed" value="true" />
+      <created>1772562926472</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1772562926472</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add description and expire policy">
+      <option name="closed" value="true" />
+      <created>1772583710517</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1772583710517</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add registration class">
+      <option name="closed" value="true" />
+      <created>1772583764070</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1772583764070</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix filter. add remove user segments">
+      <option name="closed" value="true" />
+      <created>1772583797607</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1772583797607</updated>
+    </task>
+    <task id="LOCAL-00010" summary="finalize module tests">
+      <option name="closed" value="true" />
+      <created>1772583882697</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1772583882697</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixed IDEA package issue">
+      <option name="closed" value="true" />
+      <created>1772583946741</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1772583946741</updated>
+    </task>
+    <task id="LOCAL-00012" summary="provide new packages">
+      <option name="closed" value="true" />
+      <created>1772584051566</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1772584051566</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add .idea to gitignore again" />
+    <MESSAGE value="functional command interface" />
+    <MESSAGE value="menu parser class" />
+    <MESSAGE value="rbac system class to init statistics" />
+    <MESSAGE value="add iml to gitignore" />
+    <MESSAGE value="removed old init. add new rbac system init" />
+    <MESSAGE value="add description and expire policy" />
+    <MESSAGE value="add registration class" />
+    <MESSAGE value="fix filter. add remove user segments" />
+    <MESSAGE value="finalize module tests" />
+    <MESSAGE value="fixed IDEA package issue" />
+    <MESSAGE value="provide new packages" />
+    <option name="LAST_COMMIT_MESSAGE" value="provide new packages" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
