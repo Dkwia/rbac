@@ -26,7 +26,7 @@ public class MultiThreadSimulation {
             t.join();
         }
 
-        System.out.println("\nAll threads successfully finish their jobs.");
+        System.out.println("\nAll threads successfully finished their jobs.");
     }
 
     static class Worker implements Runnable {
