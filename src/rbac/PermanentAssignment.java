@@ -1,8 +1,10 @@
 package rbac;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class PermanentAssignment extends AbstractRoleAssignment {
 
-    private boolean revoked = false;
+    private final AtomicBoolean revoked = new AtomicBoolean(false);
 
     public PermanentAssignment(User user,
                                Role role,
@@ -10,9 +12,18 @@ public class PermanentAssignment extends AbstractRoleAssignment {
         super(user, role, metadata);
     }
 
+    public PermanentAssignment(String assignmentId,
+                               User user,
+                               Role role,
+                               AssignmentMetadata metadata,
+                               boolean revoked) {
+        super(assignmentId, user, role, metadata);
+        this.revoked.set(revoked);
+    }
+
     @Override
     public boolean isActive() {
-        return !revoked;
+        return !revoked.get();
     }
 
     @Override
@@ -21,10 +32,10 @@ public class PermanentAssignment extends AbstractRoleAssignment {
     }
 
     public void revoke() {
-        revoked = true;
+        revoked.set(true);
     }
 
     public boolean isRevoked() {
-        return revoked;
+        return revoked.get();
     }
 }

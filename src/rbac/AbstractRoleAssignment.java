@@ -1,9 +1,10 @@
 package rbac;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AbstractRoleAssignment implements RoleAssignment {
+public abstract class AbstractRoleAssignment implements RoleAssignment, Serializable {
 
     private final String assignmentId;
     private final User user;
@@ -13,8 +14,14 @@ public abstract class AbstractRoleAssignment implements RoleAssignment {
     protected AbstractRoleAssignment(User user,
                                      Role role,
                                      AssignmentMetadata metadata) {
+        this(UUID.randomUUID().toString(), user, role, metadata);
+    }
 
-        this.assignmentId = UUID.randomUUID().toString();
+    protected AbstractRoleAssignment(String assignmentId,
+                                     User user,
+                                     Role role,
+                                     AssignmentMetadata metadata) {
+        this.assignmentId = Objects.requireNonNull(assignmentId);
         this.user = Objects.requireNonNull(user);
         this.role = Objects.requireNonNull(role);
         this.metadata = Objects.requireNonNull(metadata);

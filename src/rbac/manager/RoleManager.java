@@ -5,16 +5,20 @@ import rbac.model.*;
 import rbac.repository.Repository;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 import rbac.Role;
 
 
 public class RoleManager implements Repository<Role> {
 
-    private final Map<String, Role> rolesById = new HashMap<>();
-    private final Map<String, Role> rolesByName = new HashMap<>();
+    private final Map<String, Role> rolesById = new ConcurrentHashMap<>();
+    private final Map<String, Role> rolesByName = new ConcurrentHashMap<>();
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
-    private AssignmentManager assignmentManager;
+    private volatile AssignmentManager assignmentManager;
 
     public void setAssignmentManager(AssignmentManager assignmentManager) {
         this.assignmentManager = assignmentManager;
@@ -23,92 +27,151 @@ public class RoleManager implements Repository<Role> {
     @Override
     public void add(Role role) {
         Objects.requireNonNull(role);
-
-        if (rolesByName.containsKey(role.getName())) {
-            throw new IllegalArgumentException(
-                    "Role '" + role.getName() + "' already exists");
+        lock.writeLock().lock();
+        try {
+            if (rolesByName.containsKey(role.getName())) {
+                throw new IllegalArgumentException(
+                        "Role '" + role.getName() + "' already exists");
+            }
+            rolesById.put(role.getId(), role);
+            rolesByName.put(role.getName(), role);
+        } finally {
+            lock.writeLock().unlock();
         }
-
-        rolesById.put(role.getId(), role);
-        rolesByName.put(role.getName(), role);
     }
 
     @Override
     public boolean remove(Role role) {
         if (role == null) return false;
-
-        if (assignmentManager != null &&
-                assignmentManager.hasActiveAssignmentsForRole(role)) {
-
-            throw new IllegalStateException(
-                    "Cannot remove role assigned to users");
+        lock.writeLock().lock();
+        try {
+            if (assignmentManager != null &&
+                    assignmentManager.hasActiveAssignmentsForRole(role)) {
+                throw new IllegalStateException(
+                        "Cannot remove role assigned to users");
+            }
+            rolesByName.remove(role.getName());
+            return rolesById.remove(role.getId()) != null;
+        } finally {
+            lock.writeLock().unlock();
         }
-
-        rolesByName.remove(role.getName());
-        return rolesById.remove(role.getId()) != null;
     }
 
     @Override
     public Optional<Role> findById(String id) {
-        return Optional.ofNullable(rolesById.get(id));
+        lock.readLock().lock();
+        try {
+            return Optional.ofNullable(rolesById.get(id));
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
     @Override
     public List<Role> findAll() {
-        return new ArrayList<>(rolesById.values());
+        return snapshotRoles();
     }
 
     @Override
     public int count() {
-        return rolesById.size();
+        lock.readLock().lock();
+        try {
+            return rolesById.size();
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
     @Override
     public void clear() {
-        rolesById.clear();
-        rolesByName.clear();
+        lock.writeLock().lock();
+        try {
+            rolesById.clear();
+            rolesByName.clear();
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     public Optional<Role> findByName(String name) {
-        return Optional.ofNullable(rolesByName.get(name));
+        lock.readLock().lock();
+        try {
+            return Optional.ofNullable(rolesByName.get(name));
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
     public boolean exists(String name) {
-        return rolesByName.containsKey(name);
+        lock.readLock().lock();
+        try {
+            return rolesByName.containsKey(name);
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
     public List<Role> findByFilter(RoleFilter filter) {
-        return rolesById.values().stream()
+        return snapshotRoles().stream()
+                .filter(filter::test)
+                .collect(Collectors.toList());
+    }
+
+    public List<Role> findByFilterParallel(RoleFilter filter) {
+        return snapshotRoles().parallelStream()
                 .filter(filter::test)
                 .collect(Collectors.toList());
     }
 
     public List<Role> findAll(RoleFilter filter, Comparator<Role> sorter) {
-        return rolesById.values().stream()
+        return snapshotRoles().stream()
                 .filter(filter::test)
                 .sorted(sorter)
                 .collect(Collectors.toList());
     }
 
     public void addPermissionToRole(String roleName, Permission permission) {
-        Role role = findByName(roleName)
-                .orElseThrow(() ->
-                        new NoSuchElementException("Role not found"));
-
-        role.addPermission(permission);
+        lock.writeLock().lock();
+        try {
+            Role role = Optional.ofNullable(rolesByName.get(roleName))
+                    .orElseThrow(() ->
+                            new NoSuchElementException("Role not found"));
+            role.addPermission(permission);
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     public void removePermissionFromRole(String roleName, Permission permission) {
-        Role role = findByName(roleName)
-                .orElseThrow(() ->
-                        new NoSuchElementException("Role not found"));
+        removePermissionFromRole(roleName, permission.name(), permission.resource());
+    }
 
-        role.removePermission(permission);
+    public void removePermissionFromRole(String roleName, String permissionName, String resource) {
+        lock.writeLock().lock();
+        try {
+            Role role = Optional.ofNullable(rolesByName.get(roleName))
+                    .orElseThrow(() ->
+                            new NoSuchElementException("Role not found"));
+            if (!role.removePermission(permissionName, resource)) {
+                throw new NoSuchElementException("Permission not found in role");
+            }
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     public List<Role> findRolesWithPermission(String name, String resource) {
-        return rolesById.values().stream()
+        return snapshotRoles().stream()
                 .filter(r -> r.hasPermission(name, resource))
                 .collect(Collectors.toList());
+    }
+
+    private List<Role> snapshotRoles() {
+        lock.readLock().lock();
+        try {
+            return new ArrayList<>(rolesById.values());
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 }

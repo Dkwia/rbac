@@ -1,8 +1,9 @@
 package rbac;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
-public record User(String username, String fullName, String email) {
+public record User(String username, String fullName, String email) implements Serializable {
 
     private static final Pattern USERNAME_PATTERN =
             Pattern.compile("^[a-zA-Z0-9_]{3,20}$");

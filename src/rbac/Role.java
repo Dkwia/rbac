@@ -1,16 +1,22 @@
 package rbac;
 
+import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class Role {
+public class Role implements Serializable {
 
     private final String id;
     private String name;
     private String description;
-    private final Set<Permission> permissions = new HashSet<>();
+    private final Set<Permission> permissions = ConcurrentHashMap.newKeySet();
 
     public Role(String name, String description) {
-        this.id = UUID.randomUUID().toString();
+        this(UUID.randomUUID().toString(), name, description);
+    }
+
+    public Role(String id, String name, String description) {
+        this.id = Objects.requireNonNull(id);
         this.name = Objects.requireNonNull(name);
         this.description = Objects.requireNonNull(description);
     }
@@ -40,6 +46,14 @@ public class Role {
     public String getId() { return id; }
 
     public String getName() { return name; }
+
+    public String getDescription() { return description; }
+
+    public boolean removePermission(String permissionName, String resource) {
+        return permissions.removeIf(permission ->
+                permission.name().equalsIgnoreCase(permissionName)
+                        && permission.resource().equalsIgnoreCase(resource));
+    }
 
     @Override
     public boolean equals(Object o) {

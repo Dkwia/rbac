@@ -1,6 +1,8 @@
 package rbac;
 
-public record Permission(String name, String resource, String description) {
+import java.io.Serializable;
+
+public record Permission(String name, String resource, String description) implements Serializable {
 
     public Permission {
         if (name == null || name.isBlank())
