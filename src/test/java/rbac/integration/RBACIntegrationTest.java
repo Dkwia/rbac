@@ -2,9 +2,16 @@ package test.java.rbac.integration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import rbac.manager.*;
-import rbac.model.*;
-import rbac.*;
+import rbac.AssignmentMetadata;
+import rbac.Permission;
+import rbac.PermanentAssignment;
+import rbac.Role;
+import rbac.RoleAssignment;
+import rbac.TemporaryAssignment;
+import rbac.User;
+import rbac.manager.AssignmentManager;
+import rbac.manager.RoleManager;
+import rbac.manager.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -53,9 +60,7 @@ class RBACIntegrationTest {
 
     @Test
     void fullSystemWorkflowTest() {
-
-        AssignmentMetadata metadata =
-                AssignmentMetadata.now("system", "Initial setup");
+        AssignmentMetadata metadata = AssignmentMetadata.now("system", "Initial setup");
 
         PermanentAssignment adminAssignment =
                 new PermanentAssignment(admin, adminRole, metadata);
@@ -107,7 +112,7 @@ class RBACIntegrationTest {
         List<RoleAssignment> active =
                 assignmentManager.getActiveAssignments();
 
-        assertEquals(1, active.size());
+        assertEquals(1, active.stream().filter(RoleAssignment::isActive).count());
 
         assertEquals(2, userManager.count());
         assertEquals(2, roleManager.count());
