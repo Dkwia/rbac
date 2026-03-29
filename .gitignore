@@ -1,8 +1,11 @@
-### IntelliJ IDEA ###
+### IntelliJ IDEA ##
+/.idea/*
+RBAC.iml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
+*.txt
 
 ### Eclipse ###
 .apt_generated
@@ -22,6 +25,7 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
+
 
 ### VS Code ###
 .vscode/
